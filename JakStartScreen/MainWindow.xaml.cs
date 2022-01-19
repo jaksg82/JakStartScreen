@@ -21,6 +21,8 @@ namespace JakStartScreen
     public partial class MainWindow : Window
     {
         public static readonly int BaseTileSize = 64;
+        public static readonly int ImageTileSize1 = BaseTileSize - 8; // 64 - 8 = 56
+        public static readonly int ImageTileSize2 = (2 * BaseTileSize) - 8; // 128 - 8 = 120
 
         public MainWindow()
         {

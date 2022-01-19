@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="JakStartScreen.LinkItemView"
+﻿<UserControl x:Name="userControl" x:Class="JakStartScreen.LinkItemView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,16 +6,12 @@
              xmlns:local="clr-namespace:JakStartScreen"
              mc:Ignorable="d" 
              d:DesignHeight="128" d:DesignWidth="256">
-    <Grid Margin="2">
+    <Grid x:Name="grdTile" Margin="2" Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" MaxWidth="{Binding ActualHeight, ElementName=grdTile, Mode=OneWay}" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Image x:Name="ItemImage" />
-        <TextBlock x:Name="ItemName" Text="Link Item Name"/>
+        <Image x:Name="ItemImage" Source="/Assets/NoImage128px.png" ScrollViewer.VerticalScrollBarVisibility="Disabled" MaxWidth="120" MaxHeight="120" />
+        <TextBlock x:Name="ItemName" Text="New Shortcut Nuovo Collegamento" Grid.Column="1" IsHyphenationEnabled="True" TextWrapping="Wrap" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>

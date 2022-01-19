@@ -9,7 +9,21 @@
 
   <ItemGroup>
     <Folder Include="Assets\" />
-    <Folder Include="Language\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Language\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Language\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
