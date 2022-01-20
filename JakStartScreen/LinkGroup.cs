@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JakStartScreen
 {
-    internal class LinkGroup : ILinkGroup
+    internal class LinkGroup
     {
         private string _title = "";
         private int _rows;

@@ -8,7 +8,7 @@
              d:DesignHeight="128" d:DesignWidth="256">
     <Grid x:Name="grdTile" Margin="2" Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MaxWidth="{Binding ActualHeight, ElementName=grdTile, Mode=OneWay}" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Image x:Name="ItemImage" Source="/Assets/NoImage128px.png" ScrollViewer.VerticalScrollBarVisibility="Disabled" MaxWidth="120" MaxHeight="120" />

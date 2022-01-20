@@ -1,56 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace JakStartScreen
 {
+    public enum IconSize
+    {
+        Tile1x1,
+        Tile1x2,
+        Tile1x3,
+        Tile2x2,
+        Tile2x3,
+        Tile2x4
+    }
+
     /// <summary>
     /// Logica di interazione per LinkItemView.xaml
     /// </summary>
     public partial class LinkItemView : UserControl
     {
-        private LinkItem _item;
-        public string Title { get; set; }
-        public BitmapImage Image { get; set; }
-        public string Link { get; set; }
 
+        private LinkItem _item;
+        public string Title { get { return _item.Name; } }
+        public BitmapImage Image { get { return _item.Image; } }
+        public string Link { get { return _item.LinkURL; } }
+        public IconSize Size { get; set; }
+        public int Row { get; set; }
+        public int Column { get; set; }
 
         public LinkItemView()
         {
             InitializeComponent();
             _item = new LinkItem();
-            Title = JakStartScreen.Language.Strings.NewShortcut;
-            Image = new BitmapImage();
-            Link = "";
             ItemImage.Source = Image;
             ItemName.Text = Title;
-            ChangeSize(_item.Size);
+            ChangeSize(IconSize.Tile1x1);
+            Row = 0;
+            Column = 0;
         }
 
         public LinkItemView(LinkItem item)
         {
             _item = item;
-            Title = _item.Name;
-            Image = _item.Image;
-            Link = _item.LinkURL;
             ItemImage.Source = Image;
             ItemName.Text = Title;
-            ChangeSize(_item.Size);
+            ChangeSize(IconSize.Tile1x1);
+            Row = 0;
+            Column = 0;
+        }
+        public LinkItemView(LinkItem item, IconSize iconSize, int iconRow, int iconCol)
+        {
+            _item = item;
+            ItemImage.Source = Image;
+            ItemName.Text = Title;
+            ChangeSize(iconSize);
+            Row = iconRow;
+            Column = iconCol;
         }
 
         public void ChangeSize(IconSize iconSize)
         {
+            Size = iconSize;
             switch (iconSize)
             {
                 case IconSize.Tile1x1:
@@ -131,8 +141,8 @@ namespace JakStartScreen
                     //Grid.SetRowSpan(ItemName, 2);
                     ItemName.Visibility = Visibility.Visible;
                     break;
-
-
+                default:
+                    break;
             }
         }
     }

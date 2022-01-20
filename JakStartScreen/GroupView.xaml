@@ -1,0 +1,35 @@
+﻿<UserControl x:Name="userControl" x:Class="JakStartScreen.GroupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JakStartScreen"
+             mc:Ignorable="d" 
+             d:DesignHeight="128" d:DesignWidth="384">
+    <Grid x:Name="grdLayout">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64" />
+            <RowDefinition Height="64" />
+            <RowDefinition Height="64" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="64" />
+            <ColumnDefinition Width="64" />
+            <ColumnDefinition Width="64" />
+            <ColumnDefinition Width="64" />
+            <ColumnDefinition Width="64" />
+            <ColumnDefinition Width="64" />
+        </Grid.ColumnDefinitions>
+        <Label x:Name="lblTitle" 
+               Grid.ColumnSpan="6" 
+               Content="Group Title" 
+               Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" 
+               Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" 
+               VerticalAlignment="Stretch" Margin="2" VerticalContentAlignment="Center" 
+               Padding="6,6,6,6" 
+               MaxWidth="{Binding ActualWidth, ElementName=userControl, Mode=OneWay}" 
+               ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+               FontWeight="Bold" 
+               FontSize="18" />
+    </Grid>
+</UserControl>
