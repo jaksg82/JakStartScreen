@@ -70,6 +70,15 @@ namespace JakStartScreen.Language {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a New Group.
+        /// </summary>
+        internal static string NewGroup {
+            get {
+                return ResourceManager.GetString("NewGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a New shortcut.
         /// </summary>
         internal static string NewShortcut {

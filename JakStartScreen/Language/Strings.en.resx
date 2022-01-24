@@ -118,9 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="NewShortcut" xml:space="preserve">
-    <value>Nuovo collegamento</value>
+    <value>New shortcut</value>
   </data>
   <data name="NewGroup" xml:space="preserve">
-    <value>Nuovo gruppo</value>
+    <value>New group</value>
   </data>
 </root>

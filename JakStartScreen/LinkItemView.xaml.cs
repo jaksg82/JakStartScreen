@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Xml.Linq;
 
 namespace JakStartScreen
 {
@@ -19,11 +20,17 @@ namespace JakStartScreen
     /// </summary>
     public partial class LinkItemView : UserControl
     {
-
         private LinkItem _item;
-        public string Title { get { return _item.Name; } }
-        public BitmapImage Image { get { return _item.Image; } }
-        public string Link { get { return _item.LinkURL; } }
+
+        public string Title
+        { get { return _item.Name; } }
+
+        public BitmapImage Image
+        { get { return _item.Image; } }
+
+        public string Link
+        { get { return _item.LinkURL; } }
+
         public IconSize Size { get; set; }
         public int Row { get; set; }
         public int Column { get; set; }
@@ -48,6 +55,7 @@ namespace JakStartScreen
             Row = 0;
             Column = 0;
         }
+
         public LinkItemView(LinkItem item, IconSize iconSize, int iconRow, int iconCol)
         {
             _item = item;
@@ -76,6 +84,7 @@ namespace JakStartScreen
                     //Grid.SetRowSpan(ItemName, 2);
                     ItemName.Visibility = Visibility.Collapsed;
                     break;
+
                 case IconSize.Tile1x2:
                     // Set Image Size
                     //Grid.SetColumnSpan(ItemImage, 1);
@@ -89,6 +98,7 @@ namespace JakStartScreen
                     //Grid.SetRowSpan(ItemName, 2);
                     ItemName.Visibility = Visibility.Visible;
                     break;
+
                 case IconSize.Tile1x3:
                     // Set Image Size
                     //Grid.SetColumnSpan(ItemImage, 1);
@@ -102,6 +112,7 @@ namespace JakStartScreen
                     //Grid.SetRowSpan(ItemName, 2);
                     ItemName.Visibility = Visibility.Visible;
                     break;
+
                 case IconSize.Tile2x2:
                     // Set Image Size
                     //Grid.SetColumnSpan(ItemImage, 1);
@@ -115,6 +126,7 @@ namespace JakStartScreen
                     //Grid.SetRowSpan(ItemName, 2);
                     ItemName.Visibility = Visibility.Collapsed;
                     break;
+
                 case IconSize.Tile2x3:
                     // Set Image Size
                     //Grid.SetColumnSpan(ItemImage, 1);
@@ -128,6 +140,7 @@ namespace JakStartScreen
                     //Grid.SetRowSpan(ItemName, 2);
                     ItemName.Visibility = Visibility.Visible;
                     break;
+
                 case IconSize.Tile2x4:
                     // Set Image Size
                     //Grid.SetColumnSpan(ItemImage, 1);
@@ -141,6 +154,7 @@ namespace JakStartScreen
                     //Grid.SetRowSpan(ItemName, 2);
                     ItemName.Visibility = Visibility.Visible;
                     break;
+
                 default:
                     break;
             }

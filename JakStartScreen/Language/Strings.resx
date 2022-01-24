@@ -124,4 +124,7 @@
   <data name="NewShortcut" xml:space="preserve">
     <value>New shortcut</value>
   </data>
+  <data name="NewGroup" xml:space="preserve">
+    <value>New Group</value>
+  </data>
 </root>
