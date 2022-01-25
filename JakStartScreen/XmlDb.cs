@@ -20,6 +20,7 @@ namespace JakStartScreen
         public static string LinkViewCol = "Column";
         public static string LinkViewImageHeight = "Height";
         public static string LinkViewImageWidth = "Width";
+        public static string LinkViewImageBytes = "Bytes";
 
         private static XElement TileSizeToXElement(IconSize size)
         {
@@ -27,41 +28,19 @@ namespace JakStartScreen
             switch (size)
             {
                 case IconSize.Tile1x1: resSize = "Tile1x1"; break;
-                case IconSize.Tile1x2: resSize = "Tile1x2"; break;
-                case IconSize.Tile1x3: resSize = "Tile1x3"; break;
+                case IconSize.Tile1x4: resSize = "Tile1x4"; break;
                 case IconSize.Tile2x2: resSize = "Tile2x2"; break;
-                case IconSize.Tile2x3: resSize = "Tile2x3"; break;
                 case IconSize.Tile2x4: resSize = "Tile2x4"; break;
             }
             return new XElement(LinkViewSize, resSize);
         }
 
-        private static XElement ImageToXElement(BitmapImage image)
+        private static XElement ImageToXElement(BitmapImage image, byte[] imageBytes)
         {
-            byte[] bmpData;
-            // Get an Image Stream
-            using (MemoryStream ms = new MemoryStream())
-            {
-                WriteableBitmap btmMap = new WriteableBitmap(image);
-
-                // write an image into the stream
-                //Extensions.SaveJpeg(btmMap, ms, image.PixelWidth, image.PixelHeight, 0, 100);
-
-                // reset the stream pointer to the beginning
-                ms.Seek(0, 0);
-                //read the stream into a byte array
-                bmpData = new byte[ms.Length];
-                ms.Read(bmpData, 0, bmpData.Length);
-            }
-            //data now holds the bytes of the image
-            string resStr = Convert.ToBase64String(bmpData);
-            int imgW, imgH;
-            imgW = image.PixelWidth;
-            imgH = image.PixelHeight;
-
-            XElement resXml = new XElement(XmlDb.LinkViewImage, resStr);
-            resXml.SetAttributeValue(XmlDb.LinkViewImageHeight, imgH);
-            resXml.SetAttributeValue(XmlDb.LinkViewImageWidth, imgW);
+            XElement resXml = new XElement(XmlDb.LinkViewImage);
+            resXml.Add(new XElement(XmlDb.LinkViewImageHeight, image.PixelHeight));
+            resXml.Add(new XElement(XmlDb.LinkViewImageWidth, image.PixelWidth));
+            resXml.Add(new XElement(XmlDb.LinkViewImageBytes, Convert.ToBase64String(imageBytes)));
             return resXml;
         }
 
@@ -73,7 +52,7 @@ namespace JakStartScreen
             lnk.Add(TileSizeToXElement(itemView.Size));
             lnk.Add(new XElement(XmlDb.LinkViewRow, itemView.Row));
             lnk.Add(new XElement(XmlDb.LinkViewCol, itemView.Column));
-            lnk.Add(ImageToXElement(itemView.Image));
+            lnk.Add(ImageToXElement(itemView.Image, itemView.ImageBytes));
             return lnk;
         }
     }

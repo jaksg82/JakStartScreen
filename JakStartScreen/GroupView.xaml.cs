@@ -38,7 +38,7 @@ namespace JakStartScreen
             {
                 foreach (LinkItemView item in _tiles)
                 {
-                    if (item.Size == IconSize.Tile1x1 || item.Size == IconSize.Tile1x2 || item.Size == IconSize.Tile1x3)
+                    if (item.Size == IconSize.Tile1x1 || item.Size == IconSize.Tile1x4)
                     {
                         resRow = Math.Max(resRow, item.Row + 1);
                     }

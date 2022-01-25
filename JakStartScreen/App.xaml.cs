@@ -13,5 +13,12 @@ namespace JakStartScreen
     /// </summary>
     public partial class App : Application
     {
+        public List<GroupView> GroupViews { get; set; }
+
+        public App()
+        {
+            InitializeComponent();
+            GroupViews = new List<GroupView>();
+        }
     }
 }
