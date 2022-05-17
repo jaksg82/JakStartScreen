@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "WSL": {
+      "commandName": "WSL2",
+      "environmentVariables": {},
+      "distributionName": ""
+    },
+    "List_Save": {
+      "commandName": "Project",
+      "commandLineArgs": "%PUBLIC%\\Documents\\ListAppx.txt"
+    },
+    "List_Show": {
+      "commandName": "Project"
+    }
+  }
+}

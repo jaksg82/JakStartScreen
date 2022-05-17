@@ -18,6 +18,7 @@ namespace JakStartScreen
 
         public string Name { get; set; }
         public string LinkURL { get; set; }
+        public string Parent { get; set; }
         public BitmapImage Image { get; set; }
         public AppType Type { get; set; }
         private byte[] _data;

@@ -70,6 +70,24 @@ namespace JakStartScreen.Language {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a JakStartScreen.
+        /// </summary>
+        internal static string JakStartScreen {
+            get {
+                return ResourceManager.GetString("JakStartScreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a List updating ....
+        /// </summary>
+        internal static string ListUpdating {
+            get {
+                return ResourceManager.GetString("ListUpdating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a New Group.
         /// </summary>
         internal static string NewGroup {
@@ -84,6 +102,15 @@ namespace JakStartScreen.Language {
         internal static string NewShortcut {
             get {
                 return ResourceManager.GetString("NewShortcut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a StartScreen - Available Links: .
+        /// </summary>
+        internal static string StartScreenAvailableLinks {
+            get {
+                return ResourceManager.GetString("StartScreenAvailableLinks", resourceCulture);
             }
         }
     }

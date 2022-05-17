@@ -33,7 +33,9 @@ namespace JakStartScreen
                 // You can even get the Jumbo icon in one shot
                 Bitmap icon = app.Thumbnail.ExtraLargeBitmap;
                 BitmapImage bmp = Bitmap2BitmapImage(icon);
-                LinkItem.AppType apty = app.IsLink ? LinkItem.AppType.Desktop : LinkItem.AppType.AppX;
+                //string appParent = app.Parent.Name;
+                //LinkItem.AppType apty = app.IsLink ? LinkItem.AppType.Desktop : LinkItem.AppType.AppX;
+                LinkItem.AppType apty = TryParseType(app.ParsingName);
 
                 LinkItem lnk = new LinkItem(app.Name, app.ParsingName, bmp, apty);
                 apps.Add(lnk);
@@ -76,6 +78,13 @@ namespace JakStartScreen
             ms.Close();
 
             return retval;
+        }
+
+        private static LinkItem.AppType TryParseType(string inUrl)
+        {
+            if (inUrl.Contains('\\')) { return LinkItem.AppType.Desktop; }
+            if (inUrl.StartsWith("http")) { return LinkItem.AppType.Website; }
+            return LinkItem.AppType.AppX;
         }
     }
 }

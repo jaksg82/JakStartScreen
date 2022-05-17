@@ -8,8 +8,9 @@
     Title="MainWindow"
     Width="800"
     Height="450"
+    Loaded="OnLoaded"
     WindowStyle="SingleBorderWindow"
-    mc:Ignorable="d" Loaded="OnLoaded">
+    mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="48" />
@@ -21,6 +22,12 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}">
+                <Button
+                    x:Name="btnList"
+                    Height="{Binding ActualWidth, ElementName=btnSettings, Mode=OneWay}"
+                    Content="List" />
+            </StackPanel>
             <StackPanel Grid.Row="2" Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}">
                 <Button
                     x:Name="btnSettings"

@@ -127,4 +127,13 @@
   <data name="NewGroup" xml:space="preserve">
     <value>New Group</value>
   </data>
+  <data name="StartScreenAvailableLinks" xml:space="preserve">
+    <value>StartScreen - Available Links: </value>
+  </data>
+  <data name="ListUpdating" xml:space="preserve">
+    <value>List updating ...</value>
+  </data>
+  <data name="JakStartScreen" xml:space="preserve">
+    <value>JakStartScreen</value>
+  </data>
 </root>
