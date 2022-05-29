@@ -134,5 +134,10 @@ namespace JakStartScreen
                     break;
             }
         }
+
+        public LinkItem ToLinkItem()
+        {
+            return _item;
+        }
     }
 }

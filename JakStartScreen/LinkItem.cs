@@ -42,6 +42,7 @@ namespace JakStartScreen
             Image = new BitmapImage(noBmp);
             Name = Language.Strings.NewShortcut;
             LinkURL = "";
+            Parent = "";
             _data = byteBuffer;
         }
 
@@ -51,6 +52,7 @@ namespace JakStartScreen
             LinkURL = link;
             Image = bitmap;
             Type = type;
+            Parent = "";
             _data = GetImageBytes(bitmap);
         }
 

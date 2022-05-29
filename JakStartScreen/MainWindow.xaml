@@ -35,6 +35,10 @@
                     Content="Set" />
             </StackPanel>
         </Grid>
-        <ListBox x:Name="lst001" Grid.Column="1" />
+        <ListBox
+            x:Name="lst001"
+            Grid.Column="1"
+            Visibility="Collapsed" />
+        <ListBox x:Name="lst002" Grid.Column="1" />
     </Grid>
 </Window>

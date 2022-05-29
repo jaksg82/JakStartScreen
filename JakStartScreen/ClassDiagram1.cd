@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="JakStartScreen.MainWindow">
+    <Position X="1.25" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAAQAAhAIAAAACQACEAgAIQAAAAAEAEIAAAAAABAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="JakStartScreen.GroupView">
+    <Position X="5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAABAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>GroupView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="JakStartScreen.LinkGroup">
+    <Position X="6.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAIMAAAECABAAAAAQAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>LinkGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JakStartScreen.LinkItem">
+    <Position X="11.75" Y="1" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="JakStartScreen.LinkItem.AppType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>LinkItem.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAABABAAAAAAAAAAAQAQAAAAAABAAAQgAAAAAAAA=</HashCode>
+      <FileName>LinkItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JakStartScreen.LinkItemView">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAgEAABABAAAAACBAAAhAAAAAAQAAAAAA=</HashCode>
+      <FileName>LinkItemView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

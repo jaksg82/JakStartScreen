@@ -21,14 +21,29 @@ namespace JakStartScreen
     public partial class GroupView : UserControl
     {
         private List<LinkItemView> _tiles = new List<LinkItemView>();
+        private int _rows;
+        private int _count;
 
         public string GroupName { get; set; }
+
+        public List<LinkItemView> GetTiles
+        { get { return _tiles; } }
+
+        public int Rows => _rows;
+
+        public int Count => _count;
 
         public GroupView()
         {
             InitializeComponent();
             GroupName = JakStartScreen.Language.Strings.NewGroup;
             lblTitle.Content = GroupName;
+        }
+
+        public GroupView(string groupName, List<LinkItemView> linkItems)
+        {
+            _tiles = linkItems;
+            GroupName = groupName;
         }
 
         public int CountRows()
@@ -62,6 +77,30 @@ namespace JakStartScreen
             else
             {
                 _tiles.Add(linkItem);
+            }
+        }
+
+        private int GetItemWidth(IconSize size)
+        {
+            switch (size)
+            {
+                case IconSize.Tile1x1: return 1 * MainWindow.BaseTileSize;
+                case IconSize.Tile1x4: return 4 * MainWindow.BaseTileSize;
+                case IconSize.Tile2x2: return 2 * MainWindow.BaseTileSize;
+                case IconSize.Tile2x4: return 4 * MainWindow.BaseTileSize;
+                default: return 0;
+            }
+        }
+
+        private int GetItemHeight(IconSize size)
+        {
+            switch (size)
+            {
+                case IconSize.Tile1x1:
+                case IconSize.Tile1x4: return 1 * MainWindow.BaseTileSize;
+                case IconSize.Tile2x2:
+                case IconSize.Tile2x4: return 2 * MainWindow.BaseTileSize;
+                default: return 0;
             }
         }
     }
