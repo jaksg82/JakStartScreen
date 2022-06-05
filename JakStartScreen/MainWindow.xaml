@@ -11,6 +11,39 @@
     Loaded="OnLoaded"
     WindowStyle="SingleBorderWindow"
     mc:Ignorable="d">
+    <Window.Resources>
+        <Style x:Key="LinkListImage" TargetType="Image">
+            <Setter Property="Height" Value="56" />
+            <Setter Property="Width" Value="56" />
+        </Style>
+        <Style x:Key="lstLinks" TargetType="ListBox">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Image
+                                Grid.RowSpan="2"
+                                Source="{Binding Image}"
+                                Style="{StaticResource LinkListImage}" />
+                            <TextBlock Grid.Column="1" Text="{Binding Name}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="{Binding Type}" />
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="48" />
@@ -26,6 +59,7 @@
                 <Button
                     x:Name="btnList"
                     Height="{Binding ActualWidth, ElementName=btnSettings, Mode=OneWay}"
+                    Click="MenuListAllButtonClick"
                     Content="List" />
             </StackPanel>
             <StackPanel Grid.Row="2" Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}">
@@ -38,7 +72,11 @@
         <ListBox
             x:Name="lst001"
             Grid.Column="1"
+            Style="{StaticResource lstLinks}"
             Visibility="Collapsed" />
-        <ListBox x:Name="lst002" Grid.Column="1" />
+        <ListView
+            x:Name="lst002"
+            Grid.Column="1"
+            Visibility="Visible" />
     </Grid>
 </Window>

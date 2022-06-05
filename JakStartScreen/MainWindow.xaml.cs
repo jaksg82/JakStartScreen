@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 //using System.Windows.Shapes;
 using System.IO;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace JakStartScreen
 {
@@ -27,7 +28,7 @@ namespace JakStartScreen
         public static readonly int ImageTileSize1 = BaseTileSize - 8; // 64 - 8 = 56
         public static readonly int ImageTileSize2 = (2 * BaseTileSize) - 8; // 128 - 8 = 120
         private List<LinkItem> availApps;
-        private List<LinkGroup> userGroups;
+        private List<GroupView> userGroups;
         private bool AvailAppsLoaded = false;
         private bool UserGroupsLoaded = false;
         private static string xListFile = Path.Combine(App.AppDataRoamingFolder, JakStartScreen.Language.Strings.JakStartScreen, "AvailApps.xml");
@@ -40,7 +41,7 @@ namespace JakStartScreen
             InitializeComponent();
             Title = JakStartScreen.Language.Strings.StartScreenAvailableLinks;
             availApps = new List<LinkItem>();
-            userGroups = new List<LinkGroup>();
+            userGroups = new List<GroupView>();
 
             // Background workers
             BgwGetAvailApps.DoWork += new DoWorkEventHandler(BgwGetAvailApps_DoWork);
@@ -55,22 +56,35 @@ namespace JakStartScreen
             if (File.Exists(xUserGroups))
             {
                 // Load the file content
-                UserGroupsLoaded = true;
+                UserGroupsLoaded = GetUserGroupList(xUserGroups);
             }
             else
             {
                 // Create and load a default file
+                List<LinkItemView> listlnk = new List<LinkItemView>();
+                listlnk.Add(new LinkItemView());
+                GroupView g01 = new("Start Group", listlnk);
+                userGroups.Add(g01);
                 UserGroupsLoaded = true;
             }
+            if (UserGroupsLoaded)
+            {
+                lst002Update();
+            }
 
+            LinkItem tmpLnk = new LinkItem();
+            tmpLnk.Name = "Loading list ..";
+            ObservableCollection<LinkItem> obs = new();
+            obs.Add(tmpLnk);
+            lst001.ItemsSource = obs;
             // Check and load the list of installed apps
             if (File.Exists(xListFile))
             {
                 //availApps = XmlDb.LoadAppListDb(xListFile);
-                lst001.Items.Clear();
-                TextBlock txb = new TextBlock();
-                txb.Text = JakStartScreen.Language.Strings.ListUpdating;
-                lst001.Items.Add(txb);
+                //lst001.Items.Clear();
+                //TextBlock txb = new TextBlock();
+                //txb.Text = JakStartScreen.Language.Strings.ListUpdating;
+                //lst001.Items.Add(txb);
                 if (BgwGetAvailApps.IsBusy != true)
                 {
                     BgwGetAvailApps.RunWorkerAsync(new DoWorkEventArgs(xListFile));
@@ -80,9 +94,9 @@ namespace JakStartScreen
             {
                 //availApps = ScanAppFolder.GetApps();
                 //XmlDb.SaveAppListDb(xListFile, availApps);
-                TextBlock txb = new TextBlock();
-                txb.Text = JakStartScreen.Language.Strings.ListUpdating;
-                lst001.Items.Add(txb);
+                //TextBlock txb = new TextBlock();
+                //txb.Text = JakStartScreen.Language.Strings.ListUpdating;
+                //lst001.Items.Add(txb);
                 if (BgwUpdateAvailApps.IsBusy != true)
                 {
                     BgwUpdateAvailApps.RunWorkerAsync(new DoWorkEventArgs(xListFile));
@@ -90,14 +104,33 @@ namespace JakStartScreen
             }
         }
 
+        private bool GetUserGroupList(string xmlFile)
+        {
+            if (xmlFile == null)
+            {
+                return false;
+            }
+            else
+            {
+                if (!File.Exists(xmlFile))
+                {
+                    userGroups = XmlDb.LoadUserGroups(xmlFile);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
         private void BgwGetAvailApps_DoWork(object sender, DoWorkEventArgs e)
         {
             // Do work
-            string appFile = "";
-            DoWorkEventArgs passArgs = (DoWorkEventArgs)e.Argument;
-            if (passArgs.Argument != null)
+            if (e.Argument != null)
             {
-                appFile = (string)passArgs.Argument;
+                DoWorkEventArgs eArg = (DoWorkEventArgs)e.Argument;
+                string appFile = (string)eArg.Argument;
                 e.Result = XmlDb.LoadAppListDb(appFile);
             }
         }
@@ -127,7 +160,8 @@ namespace JakStartScreen
             if (e.Argument != null)
             {
                 // Do work
-                string appFile = (string)e.Argument;
+                DoWorkEventArgs eArg = (DoWorkEventArgs)e.Argument;
+                string appFile = (string)eArg.Argument;
                 List<LinkItem> tmpList = ScanAppFolder.GetApps();
                 XmlDb.SaveAppListDb(appFile, tmpList);
                 e.Result = tmpList;
@@ -165,18 +199,15 @@ namespace JakStartScreen
         {
             if (AvailAppsLoaded)
             {
-                lst001.Items.Clear();
+                //lst001.Items.Clear();
+                ObservableCollection<LinkItem> tmpColl = new();
+
                 Title = JakStartScreen.Language.Strings.StartScreenAvailableLinks + availApps.Count;
-                foreach (LinkItem app in availApps)
+                for (int i = 0; i < availApps.Count; i++)
                 {
-                    string apptype = app.Type == LinkItem.AppType.AppX ? "AppX|" : "Desk|";
-                    string appimg = app.Image == null ? "null|" : "OK  |";
-                    TextBlock txb = new TextBlock
-                    {
-                        Text = apptype + appimg + app.Name + "|" + app.LinkURL
-                    };
-                    lst001.Items.Add(txb);
+                    tmpColl.Add(availApps[i]);
                 }
+                lst001.ItemsSource = tmpColl;
             }
         }
 
@@ -184,7 +215,26 @@ namespace JakStartScreen
         {
             if (UserGroupsLoaded)
             {
+                lst002.Items.Clear();
                 // Load the groups
+                foreach (GroupView item in userGroups)
+                {
+                    lst002.Items.Add(item);
+                }
+            }
+        }
+
+        private void MenuListAllButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (lst001.Visibility == Visibility.Visible)
+            {
+                lst001.Visibility = Visibility.Collapsed;
+                lst002.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lst001.Visibility = Visibility.Visible;
+                lst002.Visibility = Visibility.Collapsed;
             }
         }
     }
