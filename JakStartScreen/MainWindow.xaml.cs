@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.IO;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace JakStartScreen
 {
@@ -235,6 +236,29 @@ namespace JakStartScreen
             {
                 lst001.Visibility = Visibility.Visible;
                 lst002.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void lst001_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lst001.SelectedItem != null)
+            {
+                LinkItem selItem = (LinkItem)lst001.SelectedItem;
+                if (selItem.Type == LinkItem.AppType.Desktop || selItem.Type == LinkItem.AppType.AppX)
+                {
+                    string lnk = @"shell:AppsFolder\" + selItem.LinkURL;
+                    Process.Start("explorer.exe", lnk);
+                }
+                else if (selItem.Type == LinkItem.AppType.Website)
+                {
+                    // Create a Uri object from a URI string
+                    var uri = new Uri(selItem.LinkURL);
+                    Windows.System.Launcher.LaunchUriAsync(uri);
+                }
+                else
+                {
+                    // Do Nothing
+                }
             }
         }
     }

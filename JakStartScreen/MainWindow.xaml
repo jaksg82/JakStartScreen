@@ -72,6 +72,7 @@
         <ListBox
             x:Name="lst001"
             Grid.Column="1"
+            SelectionChanged="lst001_SelectionChanged"
             Style="{StaticResource lstLinks}"
             Visibility="Collapsed" />
         <ListView
